@@ -5,7 +5,7 @@ using Trendy.Data;
 
 namespace Trendy.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class HairCutBookingController : ControllerBase
     {
@@ -60,6 +60,13 @@ namespace Trendy.Controllers
             _context.SaveChanges();
 
             return new JsonResult(NoContent());
+        }
+        [HttpGet("/GetAll")]
+        public JsonResult GetAll()
+        {
+            var result = _context.Bookings.ToList();
+
+            return new JsonResult(Ok(result));
         }
 
     }
